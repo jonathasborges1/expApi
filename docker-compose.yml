@@ -9,6 +9,8 @@ services:
     volumes:
       - ./backend:/usr/src/app
     env_file: ./backend/.env
+    depends_on:
+      - db
 
   frontend:
     container_name: loja_frontend
