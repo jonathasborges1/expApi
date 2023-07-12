@@ -28,6 +28,20 @@ const login = async (req: Request, res: Response) => {
       res.status(500).json(error);
    }
 }
-const logout = async (req: Request, res: Response) => {}
+
+const logout = (req: Request, res: Response) => { 
+   if(req.session.uid) {
+       req.session.destroy((err) => {
+           if(err) return res.status(500).json(err);
+           res.status(200).json({
+               msg: 'O logout foi feito com sucesso'
+           });
+       })
+   }else{
+       res.status(400).json({
+           msg: 'O usuário não está logado'
+       })
+   }
+};
 
 export default { signup, login, logout }
